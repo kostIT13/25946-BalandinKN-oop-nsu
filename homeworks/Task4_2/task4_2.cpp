@@ -6,6 +6,10 @@
 #include <functional>
 #include <vector>
 
+bool equalsVal(int x, int val) {
+    return x == val;
+}
+
 void solveTask4_2(const std::vector<int>& vecLarge, const std::vector<int>& vecSmall) {
     std::cout << "             ЗАДАНИЕ 4.II\n";
 
@@ -78,8 +82,10 @@ void solveTask4_2(const std::vector<int>& vecLarge, const std::vector<int>& vecS
     std::cout << "Способ B (<algorithm> + lambda):\n";
     for (int i = 0; i < (int)dupLarge.size(); ++i) {
         int val = dupLarge[i];
-        int countInSmall = (int)std::count_if(vecSmall.begin(), vecSmall.end(),
-                                              [val](int x) { return x == val; });
+        // int countInSmall = (int)std::count_if(vecSmall.begin(), vecSmall.end(),
+        //                                       [val](int x) { return x == val; });
+
+        int countInSmall = (int)std::count_if(vecSmall.begin(), vecSmall.end(), std::bind(equalsVal, std::placeholders::_1, val));
         std::cout << "  Число " << val
                   << ": в 1-м векторе " << freqLarge[val]
                   << " раз, во 2-м векторе " << countInSmall << " раз.\n";
