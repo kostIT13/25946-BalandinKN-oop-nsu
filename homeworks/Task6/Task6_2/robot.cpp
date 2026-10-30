@@ -3,7 +3,6 @@
 #include <stdexcept>
 #include <algorithm>
 
-// ---------- Нормализация ----------
 std::string QuadrupedRobot::normalizeName(const std::string& n) {
     return n.empty() ? "Unnamed" : n;
 }

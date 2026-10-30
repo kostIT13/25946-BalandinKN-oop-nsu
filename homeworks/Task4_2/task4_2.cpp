@@ -84,9 +84,9 @@ void solveTask4_2(const std::vector<int>& vecLarge, const std::vector<int>& vecS
     for (int i = 0; i < (int)dupLarge.size(); ++i) {
         int val = dupLarge[i];
 
-        int countInSmall = (int)std::count_if(
+        int countInSmall = static_cast<int>(std::count_if(
             vecSmall.begin(), vecSmall.end(),
-            std::bind(equalsVal, std::placeholders::_1, val)
+            std::bind(equalsVal, std::placeholders::_1, val))
         );
 
         std::cout << "  Число " << val
