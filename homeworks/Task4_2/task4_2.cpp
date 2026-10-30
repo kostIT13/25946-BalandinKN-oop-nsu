@@ -6,6 +6,7 @@
 #include <functional>
 #include <vector>
 
+// Обычная функция-предикат: принимает два аргумента
 bool equalsVal(int x, int val) {
     return x == val;
 }
@@ -78,14 +79,16 @@ void solveTask4_2(const std::vector<int>& vecLarge, const std::vector<int>& vecS
                   << " раз, во 2-м векторе " << countInSmall << " раз.\n";
     }
 
-    // Способ B: через <algorithm> + lambda
-    std::cout << "Способ B (<algorithm> + lambda):\n";
+    // Способ B: через <algorithm> + std::bind
+    std::cout << "Способ B (<algorithm> + std::bind):\n";
     for (int i = 0; i < (int)dupLarge.size(); ++i) {
         int val = dupLarge[i];
-        // int countInSmall = (int)std::count_if(vecSmall.begin(), vecSmall.end(),
-        //                                       [val](int x) { return x == val; });
 
-        int countInSmall = (int)std::count_if(vecSmall.begin(), vecSmall.end(), std::bind(equalsVal, std::placeholders::_1, val));
+        int countInSmall = (int)std::count_if(
+            vecSmall.begin(), vecSmall.end(),
+            std::bind(equalsVal, std::placeholders::_1, val)
+        );
+
         std::cout << "  Число " << val
                   << ": в 1-м векторе " << freqLarge[val]
                   << " раз, во 2-м векторе " << countInSmall << " раз.\n";
