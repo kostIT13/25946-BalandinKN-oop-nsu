@@ -13,12 +13,10 @@ namespace modified {
 
         if (std::bernoulli_distribution(0.5)(gen)) {
             if constexpr (std::is_integral_v<T>) {
-                // Для целых — равномерное целое в [-10, 10]
                 result += static_cast<T>(
                     std::uniform_int_distribution<int>(-10, 10)(gen)
                 );
             } else {
-                // Для вещественных — равномерное вещественное в [-10, 10]
                 result += static_cast<T>(
                     std::uniform_real_distribution<double>(-10.0, 10.0)(gen)
                 );

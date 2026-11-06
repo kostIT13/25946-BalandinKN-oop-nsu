@@ -4,15 +4,15 @@ project(oop_hw LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-option(BUILD_TESTS "Build unit tests with GoogleTest" ON) # опция 
+option(BUILD_TESTS "Build unit tests with GoogleTest" ON)
 
 add_subdirectory(lib)
 
 add_executable(app main.cpp)
-target_link_libraries(app PRIVATE ordinary_lib modified_lib)
+target_link_libraries(app PRIVATE ordinary_lib)
 
 if(BUILD_TESTS)
-    message(STATUS "Tests: ENABLED — подключаю googletest и tests/")
+    message(STATUS "Tests: ENABLED")
 
     include(FetchContent)
     FetchContent_Declare(
@@ -26,5 +26,5 @@ if(BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)
 else()
-    message(STATUS "Tests: DISABLED — googletest и tests/ не подключаются")
+    message(STATUS "Tests: DISABLED")
 endif()
