@@ -1,4 +1,4 @@
-#include "QuadrupedRobot.h"
+#include "robot.h"
 #include <iostream>
 #include <vector>
 
