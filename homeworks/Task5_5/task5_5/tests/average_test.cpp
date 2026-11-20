@@ -28,11 +28,11 @@ TEST(AverageLongTest, BigValues) {
 
 TEST(AverageTest, ExpectContinuesAfterFailure) {
     EXPECT_EQ(ordinary::average<int>(3, 4), 3);
-    EXPECT_EQ(ordinary::average<int>(5, 5), 99);   // ПРОВАЛ
-    EXPECT_EQ(ordinary::average<int>(0, 0), 0);    // выполнится всё равно
+    EXPECT_EQ(ordinary::average<int>(5, 5), 99);  
+    EXPECT_EQ(ordinary::average<int>(0, 0), 0);  
 }
 
 TEST(AverageTest, AssertStopsAfterFailure) {
-    ASSERT_EQ(ordinary::average<int>(5, 5), 99);   // ПРОВАЛ — дальше не пойдёт
+    ASSERT_EQ(ordinary::average<int>(5, 5), 99);   
     EXPECT_EQ(ordinary::average<int>(0, 0), 0);
 }

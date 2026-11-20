@@ -4,7 +4,9 @@ mkdir build
 cd build
 
 cmake ..
+cmake .. -DBUILD_TESTS=OFF
 cmake --build . --config Debug
+
 
 # Приложение
 .\Debug\app.exe
