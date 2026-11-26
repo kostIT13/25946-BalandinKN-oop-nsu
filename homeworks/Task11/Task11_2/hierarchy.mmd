@@ -1,0 +1,44 @@
+%% Задание 11.II — UML-диаграмма иерархии классов (исходник для mermaid.live / VS Code)
+%% Готовые картинки: uml_virtual.svg (решение), uml_diamond_problem.svg (п.5 без virtual)
+classDiagram
+    direction TB
+
+    class QuadrupedRobot {
+        - string name
+        - int liveCount$
+        + QuadrupedRobot(name)
+        + ~QuadrupedRobot()
+        + getName() string
+        + setName(name)
+        + getLiveCount() int$
+    }
+
+    class CargoRobot {
+        - double cargoWeight
+        + CargoRobot(cargoWeight, name)
+        + ~CargoRobot()
+        + getCargoWeight() double
+        + setCargoWeight(w)
+    }
+
+    class AutonomousRobot {
+        - double autonomousRangeKm
+        + AutonomousRobot(rangeKm, name)
+        + ~AutonomousRobot()
+        + getAutonomousRangeKm() double
+        + setAutonomousRangeKm(km)
+    }
+
+    class CargoAutonomousRobot {
+        - announce(what) void
+        + CargoAutonomousRobot(cargo, range, name)
+        + ~CargoAutonomousRobot()
+        + describe() void
+    }
+
+    QuadrupedRobot <|.. CargoRobot : «public virtual»
+    QuadrupedRobot <|.. AutonomousRobot : «public virtual»
+    CargoRobot <|-- CargoAutonomousRobot : public
+    AutonomousRobot <|-- CargoAutonomousRobot : public
+
+    note for CargoAutonomousRobot "Виртуальную базу инициализирует самый\nпроизводный класс: QuadrupedRobot(name)\nв списке инициализаторов обязателен"

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 640" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="hollow2" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="14" markerHeight="14" orient="auto">
+      <path d="M1,1 L11,6 L1,11 Z" fill="#ffffff" stroke="#2b2b2b" stroke-width="1.4"/>
+    </marker>
+    <style>
+      .cls  { fill:#fbeeee; stroke:#2b2b2b; stroke-width:1.4; }
+      .dup  { fill:#f6f6f6; stroke:#a33; stroke-width:1.2; stroke-dasharray:5 3; }
+      .ttl  { font-weight:600; text-anchor:middle; }
+      .mem  { text-anchor:start; }
+      .ln   { font-weight:600; text-anchor:middle; fill:#8a4b00; font-size:12; }
+      .edge { stroke:#2b2b2b; stroke-width:1.4; fill:none; }
+      .cap  { text-anchor:middle; fill:#5b6770; font-size:11; }
+      .warn { fill:#8a1f1f; font-size:11.5; text-anchor:middle; }
+    </style>
+  </defs>
+
+  <text x="380" y="24" class="ttl" font-size="15">П.5 — тот же ромб без virtual: два подобъекта базы</text>
+
+  <rect x="238" y="46" width="284" height="96" class="cls" rx="3"/>
+  <text x="380" y="65" class="ttl">DiamondBoth</text>
+  <line x1="238" y1="73" x2="522" y2="73" stroke="#2b2b2b" stroke-width="1"/>
+  <text x="248" y="90" class="mem">наследует ДВЕ копии базы</text>
+  <text x="248" y="106" class="mem">sizeof = 64 байта (с virtual — 56)</text>
+  <line x1="238" y1="114" x2="522" y2="114" stroke="#2b2b2b" stroke-width="1"/>
+  <text x="248" y="131" class="mem">+ DiamondBoth(cargo, range, name)</text>
+
+  <rect x="46" y="248" width="284" height="96" class="cls" rx="3"/>
+  <text x="188" y="267" class="ttl">DiamondCargo</text>
+  <line x1="46" y1="275" x2="330" y2="275" stroke="#2b2b2b" stroke-width="1"/>
+  <text x="56" y="292" class="mem">- cargoWeight : double</text>
+  <line x1="46" y1="300" x2="330" y2="300" stroke="#2b2b2b" stroke-width="1"/>
+  <text x="56" y="317" class="mem">+ getCargoWeight() : double</text>
+  <text x="56" y="333" class="mem">+ ~DiamondCargo()</text>
+
+  <rect x="430" y="248" width="284" height="96" class="cls" rx="3"/>
+  <text x="572" y="267" class="ttl">DiamondAuto</text>
+  <line x1="430" y1="275" x2="714" y2="275" stroke="#2b2b2b" stroke-width="1"/>
+  <text x="440" y="292" class="mem">- rangeKm : double</text>
+  <line x1="430" y1="300" x2="714" y2="300" stroke="#2b2b2b" stroke-width="1"/>
+  <text x="440" y="317" class="mem">+ getRangeKm() : double</text>
+  <text x="440" y="333" class="mem">+ ~DiamondAuto()</text>
+
+  <rect x="60" y="432" width="256" height="76" class="dup" rx="3"/>
+  <text x="188" y="451" class="ttl">QuadrupedRobot #1</text>
+  <line x1="60" y1="459" x2="316" y2="459" stroke="#a33" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="70" y="476" class="mem">- name = "Renamed-By-Cargo"</text>
+  <text x="70" y="494" class="mem">+ getName() · setName()</text>
+
+  <rect x="444" y="432" width="256" height="76" class="dup" rx="3"/>
+  <text x="572" y="451" class="ttl">QuadrupedRobot #2</text>
+  <line x1="444" y1="459" x2="700" y2="459" stroke="#a33" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="454" y="476" class="mem">- name = "Argus"</text>
+  <text x="454" y="494" class="mem">+ getName() · setName()</text>
+
+  <line class="edge" x1="188" y1="248" x2="188" y2="142" marker-end="url(#hollow2)"/>
+  <line class="edge" x1="572" y1="248" x2="572" y2="142" marker-end="url(#hollow2)"/>
+  <line class="edge" x1="188" y1="432" x2="188" y2="344" marker-end="url(#hollow2)"/>
+  <line class="edge" x1="572" y1="432" x2="572" y2="344" marker-end="url(#hollow2)"/>
+
+  <text x="150" y="200" class="ln">public</text>
+  <text x="608" y="200" class="ln">public</text>
+  <text x="108" y="400" class="ln">public (не virtual)</text>
+  <text x="652" y="400" class="ln">public (не virtual)</text>
+
+  <text x="380" y="548" class="warn">Один объект DiamondBoth — два разных имени и два набора инвариантов:</text>
+  <text x="380" y="566" class="warn">r.getName() и r = base — ambiguous (diamond_ambiguity.cpp не собирается)</text>
+  <text x="380" y="600" class="cap">Лечение — public virtual в обеих ветках ромба: остаётся единственный подобъект базы (см. uml_virtual.svg).</text>
+</svg>
